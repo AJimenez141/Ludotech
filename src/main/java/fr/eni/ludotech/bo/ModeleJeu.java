@@ -30,6 +30,6 @@ public class ModeleJeu {
 	private String nom;
 	
 	@Column(name="prix_location", nullable = false)
-	private String prix_location;
+	private Float prix_location;
 
 }
