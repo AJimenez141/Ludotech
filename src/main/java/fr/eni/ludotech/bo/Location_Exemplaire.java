@@ -21,16 +21,15 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name="LOCATION")
-public class Location {
-	
+@Table(name="LOCATION_EXEMPLAIRE")
+public class Location_Exemplaire {
 	@Id
 	@GeneratedValue()
 	private Integer id;
 	
-	@Column(name="date_debut", nullable = false)
-	private Date date_debut;
+	@Column(name="date_fin", nullable = true)
+	private Date date_fin;
 	
-	@Column(name="est_paye", nullable = false)
-	@Builder.Default private Boolean est_paye = false;
+	@Column(name="prix_final", nullable = true)
+	private Float prix_final;
 }
