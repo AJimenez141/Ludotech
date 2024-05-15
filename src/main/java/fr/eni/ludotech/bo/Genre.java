@@ -24,7 +24,7 @@ public class Genre {
 	
 	@Id
 	@GeneratedValue()
-	private Integer id_genre;
+	private Integer id;
 	
 	@Column(name="libelle")
 	private String libelle;
