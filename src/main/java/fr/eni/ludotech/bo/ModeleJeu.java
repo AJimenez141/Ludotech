@@ -26,10 +26,10 @@ public class ModeleJeu {
 	@GeneratedValue()
 	private Integer id;
 	
-	@Column(name="nom")
+	@Column(name="nom", nullable = false)
 	private String nom;
 	
-	@Column(name="prix_location")
+	@Column(name="prix_location", nullable = false)
 	private String prix_location;
 
 }

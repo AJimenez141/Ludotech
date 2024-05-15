@@ -26,10 +26,10 @@ public class Exemplaire {
 	@GeneratedValue()
 	private Integer id;
 	
-	@Column(name="code_barre")
+	@Column(name="code_barre", length = 15, nullable = false)
 	private String code_barre;
 	
-	@Column(name="est_louable")
-	private Boolean est_louable;
+	@Column(name="est_louable", nullable = false)
+	@Builder.Default Boolean est_louable = true;
 
 }

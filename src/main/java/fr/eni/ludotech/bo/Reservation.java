@@ -28,7 +28,7 @@ public class Reservation {
 	@GeneratedValue()
 	private Integer id;
 	
-	@Column(name="date_reservation")
+	@Column(name="date_reservation", nullable = false)
 	private Date date_reservation;
 
 }
