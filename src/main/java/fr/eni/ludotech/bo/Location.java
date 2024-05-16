@@ -45,5 +45,5 @@ public class Location {
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy = "location",  cascade = CascadeType.REMOVE,  orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<Location_Exemplaire> location_exemplaires;
+	private List<LocationExemplaire> location_exemplaires;
 }

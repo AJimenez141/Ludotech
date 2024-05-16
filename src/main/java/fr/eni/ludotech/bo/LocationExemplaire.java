@@ -24,7 +24,7 @@ import lombok.ToString;
 @Entity
 @IdClass(LocationExemplairePK.class)
 @Table(name="LOCATION_EXEMPLAIRE")
-public class Location_Exemplaire {
+public class LocationExemplaire {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_exemplaires")
