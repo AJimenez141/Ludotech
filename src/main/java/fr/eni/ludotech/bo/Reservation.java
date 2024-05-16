@@ -42,6 +42,6 @@ public class Reservation {
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy = "reservation",  orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<Exemplaire> exemplaires;
+	private List<Exemplaire> exemplaires_reservation;
 
 }

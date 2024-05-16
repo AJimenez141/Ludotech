@@ -38,15 +38,15 @@ public class ModeleJeu {
 	private String nom;
 	
 	@Column(name="prix_location", nullable = false)
-	private Float prix_location;
+	private Double prix_location;
 
 	@OneToMany(mappedBy = "modele",  cascade = CascadeType.REMOVE,  orphanRemoval = true,  fetch = FetchType.LAZY)
-	private List<Exemplaire> exemplaires;
+	private List<Exemplaire> exemplaires_modele;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "GENRE_MODELE",
-	    joinColumns = {@JoinColumn(name = "GENRE_FK", referencedColumnName = "genres" )}, // ID ist die Id von Einsatz
-	    inverseJoinColumns = {@JoinColumn( name = "MODELE_JEU_FK", referencedColumnName = "modeles_jeux" )} // ID ist die Id von Mitglied
+	    joinColumns = {@JoinColumn(name = "GENRE_FK")}, // ID ist die Id von Einsatz
+	    inverseJoinColumns = {@JoinColumn( name = "MODELE_JEU_FK")} // ID ist die Id von Mitglied
 	  )
 	private List<Genre> genres;
 }

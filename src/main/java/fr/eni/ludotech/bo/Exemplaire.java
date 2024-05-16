@@ -40,11 +40,11 @@ public class Exemplaire {
 	@Builder.Default Boolean est_louable = true;
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "exemplaires") 
+	@JoinColumn(name = "exemplaires_modele") 
 	private ModeleJeu modele;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "exemplaires")
+	@JoinColumn(name = "exemplaires_reservation")
 	private Reservation reservation;
 	
 	@OneToMany(mappedBy = "exemplaire",  cascade = CascadeType.REMOVE,  orphanRemoval = true, fetch = FetchType.LAZY)
