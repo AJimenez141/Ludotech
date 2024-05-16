@@ -4,13 +4,14 @@ import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -21,8 +22,17 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
+@IdClass(LocationExemplairePK.class)
 @Table(name="LOCATION_EXEMPLAIRE")
 public class Location_Exemplaire {
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "location_exemplaires")
+	private Location location;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "exemplaire_locations")
+	private Exemplaire exemplaire;
 	
 	@Column(name="date_fin", nullable = true)
 	private Date date_fin;

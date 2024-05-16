@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -39,4 +42,11 @@ public class ModeleJeu {
 
 	@OneToMany(mappedBy = "modele",  cascade = CascadeType.REMOVE,  orphanRemoval = true,  fetch = FetchType.LAZY)
 	private List<Exemplaire> exemplaires;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "GENRE_MODELE",
+	    joinColumns = {@JoinColumn(name = "GENRE_FK", referencedColumnName = "genres" )}, // ID ist die Id von Einsatz
+	    inverseJoinColumns = {@JoinColumn( name = "MODELE_JEU_FK", referencedColumnName = "modeles_jeux" )} // ID ist die Id von Mitglied
+	  )
+	private List<Genre> genres;
 }

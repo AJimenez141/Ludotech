@@ -1,6 +1,7 @@
 package fr.eni.ludotech.bo;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,4 +43,7 @@ public class Location {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "locations")
 	private Utilisateur utilisateur;
+	
+	@OneToMany(mappedBy = "location",  cascade = CascadeType.REMOVE,  orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<Location_Exemplaire> location_exemplaires;
 }
