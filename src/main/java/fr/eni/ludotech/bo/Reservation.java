@@ -1,9 +1,8 @@
 package fr.eni.ludotech.bo;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,7 +34,7 @@ public class Reservation {
 	private Integer id;
 	
 	@Column(name="date_reservation", nullable = false)
-	private Date date_reservation;
+	private LocalDate date_reservation;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reservations")
