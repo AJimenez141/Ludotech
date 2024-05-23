@@ -25,7 +25,7 @@ public class ModeleJeu {
     @Column(name = "prix_location")
     private double prixLocation;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @Builder.Default
     private List<Genre> genres = new ArrayList<>();
 }

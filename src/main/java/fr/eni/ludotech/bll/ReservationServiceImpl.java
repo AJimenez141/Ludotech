@@ -1,20 +1,18 @@
 package fr.eni.ludotech.bll;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import fr.eni.ludotech.bo.ExemplaireJeu;
 import fr.eni.ludotech.bo.ModeleJeu;
 import fr.eni.ludotech.bo.Client;
 import fr.eni.ludotech.dal.ExemplaireRepository;
-import fr.eni.ludotech.dal.UtilisateurRepository;
 
+@Component
 public class ReservationServiceImpl implements ReservationService 
 {	
 	@Autowired
 	private ExemplaireRepository exemplaireRepo;
-	
-	@Autowired
-	private UtilisateurRepository utilisateurRepo;
 
 	@Override
 	public ExemplaireJeu reserverJeu(ModeleJeu modele, Client client) throws Exception 
