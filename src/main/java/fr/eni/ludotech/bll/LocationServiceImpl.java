@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import fr.eni.ludotech.bo.Client;
 import fr.eni.ludotech.bo.ExemplaireJeu;
@@ -11,20 +12,25 @@ import fr.eni.ludotech.bo.Location;
 import fr.eni.ludotech.bo.LocationExemplaire;
 import fr.eni.ludotech.bo.ModeleJeu;
 import fr.eni.ludotech.dal.ExemplaireRepository;
+import fr.eni.ludotech.dal.LocationRepository;
 
+@Component
 public class LocationServiceImpl implements LocationService 
 {
 	@Autowired
 	private ExemplaireRepository exemplaireRepo;
+	
+	@Autowired
+	private LocationRepository locationRepo;
 
 	@Override
 	public Location louerJeux(List<ModeleJeu> jeux, Client client)
 	{
 		List<LocationExemplaire> listLocationExemplaires = new ArrayList<>();
 		
-		LocationExemplaire locationExemplaire = null;
 		for(ModeleJeu jeu : jeux)
         {
+			LocationExemplaire locationExemplaire = null;
 			try 
 			{
 				ExemplaireJeu exemplaire = exemplaireRepo.findExemplairesNonReservesByJeu(jeu.getId()).get(0);
@@ -33,30 +39,32 @@ public class LocationServiceImpl implements LocationService
 				{
 					locationExemplaire = LocationExemplaire.builder()
 							.exemplaireJeu(exemplaire)
-							.dateFin(java.time.LocalDate.now().plusDays(14))
+							.dateFin(null)
 							.prixFinal(jeu.getPrixLocation())
 							.build();
+					
+					listLocationExemplaires.add(locationExemplaire);
 				}
 			} 
 			catch (Exception e) 
 			{
-				locationExemplaire = null;
-			}
-			finally
-			{
-				if(locationExemplaire != null) listLocationExemplaires.add(locationExemplaire);
+			    continue;
 			}
         }
 		
-		Location location = Location.builder()
-				.dateLocation(java.time.LocalDate.now())
-				.estPaye(false)
-				.locationExemplaires(listLocationExemplaires)
-				.client(client).build();
+		if (listLocationExemplaires.size() == jeux.size()) 
+		{
+			Location location = Location.builder()
+					.dateLocation(java.time.LocalDate.now())
+					.estPaye(false)
+					.locationExemplaires(listLocationExemplaires)
+					.client(client).build();
 
-		if (location.getLocationExemplaires().size() == jeux.size()) {
+			locationRepo.save(location);
 			return location;
-		} else {
+		} 
+		else 
+		{
 			return null;
 		}
 	}

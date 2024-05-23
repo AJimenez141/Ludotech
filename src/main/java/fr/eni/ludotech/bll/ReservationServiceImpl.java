@@ -1,5 +1,7 @@
 package fr.eni.ludotech.bll;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,26 +19,26 @@ public class ReservationServiceImpl implements ReservationService
 	@Override
 	public ExemplaireJeu reserverJeu(ModeleJeu modele, Client client) 
 	{
-		try 
+		ExemplaireJeu exemplaire = null;
+		
+		List<ExemplaireJeu> exemplairesNonRsv = exemplaireRepo.findExemplairesNonReservesByJeu(modele.getId());
+		
+		for(ExemplaireJeu exemplaireNonRsv : exemplairesNonRsv)
 		{
-			ExemplaireJeu exemplaire = exemplaireRepo.findExemplairesNonReservesByJeu(modele.getId()).get(0);
-			
 			//Vérifier que cet exemplaire n'a pas déjà été empunté par un autre client
-			if (exemplaireRepo.isExemplaireAlreadyLoue(exemplaire.getId())) 
+			if (!exemplaireRepo.isExemplaireAlreadyLoue(exemplaireNonRsv.getId())) 
 			{
-				return null;
-			}
-			//Sinon, réserver l'exemplaire pour le client
-			else
-			{
-				exemplaire.setReservationClient(client);
-				exemplaire.setDateReservation(java.time.LocalDate.now());
+				exemplaire = ExemplaireJeu.builder()
+						.id(exemplaireNonRsv.getId())
+						.dateReservation(java.time.LocalDate.now())
+						.modeleJeu(modele)
+						.reservationClient(client)
+						.build();
+				
 				exemplaireRepo.save(exemplaire);
-				return exemplaire;
+				break;
 			}
 		}
-		catch (Exception e) {
-			return null;
-		}
+		return exemplaire;
 	}
 }
