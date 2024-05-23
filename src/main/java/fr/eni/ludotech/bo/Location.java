@@ -28,8 +28,9 @@ public class Location {
     private boolean estPaye;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.PERSIST)
-    private List<LocationExemplaire> locationExemplaires;
+    private List<LocationExemplaire> exemplairesLoues;
 
     @ManyToOne()
+    @JoinColumn(name="client_id")
     private Client client;
 }

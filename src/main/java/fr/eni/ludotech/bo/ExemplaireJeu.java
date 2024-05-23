@@ -25,6 +25,7 @@ public class ExemplaireJeu {
     private boolean estLouable;
 
     @ManyToOne()
+    @JoinColumn(name="modele_jeu_id")
     private ModeleJeu modeleJeu;
 
 //    @ManyToOne()

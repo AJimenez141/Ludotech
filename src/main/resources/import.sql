@@ -1,0 +1,17 @@
+insert into Genre (id, libelle) values (1, 'Jeu de societe');
+insert into Genre (id, libelle) values (2, 'Jeu enfant');
+insert into Genre (id, libelle) values (3, 'Jeu de rôle');
+insert into Genre (id, libelle) values (4, 'Jeu de carte');
+insert into Genre (id, libelle) values (5, 'Collaboratif');
+insert into modele_jeu (id, nom, prix) values (1, 'Skyjo', 1);
+insert into modele_jeu (id, nom, prix) values (2, 'Splendor', 2 );
+insert into modele_jeu (id, nom, prix) values (3, 'Codenames', 3 );
+insert into modele_jeu (id, nom, prix) values (4, 'Donjon et dragons', 4 );
+insert into utilisateur (id, type, email, mot_de_passe, nom, prenom, telephone) values ( 1, 'C', 'bob@gmal.com', 'azerty', 'Dupont', 'Bob', '020202');
+insert into utilisateur ( id, type, email, mot_de_passe, nom, prenom, telephone) values ( 2, 'C', 'jane@gmal.com', 'azerty', 'Tergal', 'Jane', '030303');
+insert into exemplaire_jeu (id, est_louable, modele_jeu_id, reservation_client_id, date_reservation, code_barre) values (1, 1, 1, null, null,  '1111');
+insert into exemplaire_jeu (id, est_louable, modele_jeu_id, reservation_client_id, date_reservation, code_barre) values (2, 1, 1, null,null,  '1222');
+insert into exemplaire_jeu (id, est_louable, modele_jeu_id, reservation_client_id, date_reservation, code_barre) values (3, 1, 2, null, null, '1111');
+insert into location (id, client_id, date_loc, est_paye) values (1, 2, GETDATE(), 0);
+insert into location_exemplaire (id, jeu_id, location_id, date_fin, prix_final) values (1, 2, 1, null, null);
+insert into location_exemplaire (id, jeu_id, location_id, date_fin, prix_final)   values (2, 3, 1, null, null);

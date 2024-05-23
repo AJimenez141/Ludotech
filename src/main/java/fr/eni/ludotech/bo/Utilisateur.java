@@ -12,21 +12,21 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @EqualsAndHashCode(of = "id")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="utilisateur_type")
+@DiscriminatorColumn(name="type")
 public abstract class Utilisateur {
     @Id
     @GeneratedValue
     private Integer id;
 
-    @Column(name="last_name", length = 50, nullable=false)
+    @Column(name="nom", length = 50, nullable=false)
     private String nom;
 
-    @Column(name="first_name", length = 50, nullable = false)
+    @Column(name="prenom", length = 50, nullable = false)
     private String prenom;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "mot_de_passe", nullable = false)
     private String password;
 }

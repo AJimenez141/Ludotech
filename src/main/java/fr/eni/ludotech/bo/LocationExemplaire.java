@@ -23,12 +23,12 @@ public class LocationExemplaire {
     private Integer id;
 
     @ManyToOne()
-//    @JoinColumn(name = "id_location")
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @ManyToOne()
-    @JoinColumn(name = "id_exemplaire")
-    private ExemplaireJeu exemplaireJeu;
+    @JoinColumn(name = "jeu_id")
+    private ExemplaireJeu jeu;
 
     @Column(name = "date_fin")
     private LocalDate dateFin;

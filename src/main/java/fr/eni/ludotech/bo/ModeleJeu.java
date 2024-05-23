@@ -22,7 +22,7 @@ public class ModeleJeu {
     @Column(name = "nom")
     private String nom;
 
-    @Column(name = "prix_location")
+    @Column(name = "prix")
     private double prixLocation;
 
     @ManyToMany(fetch = FetchType.EAGER)
