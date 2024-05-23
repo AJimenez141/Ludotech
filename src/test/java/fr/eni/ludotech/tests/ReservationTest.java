@@ -115,7 +115,7 @@ class ReservationTest
 	//Tester la réservation d'un jeu
 	void testResaJeu() 
 	{
-		ModeleJeu modeleMonopoly = modeleJeuRepo.findById(1).get();
+		ModeleJeu modeleMonopoly = modeleJeuRepo.findById(1).get(); //Exemplaires dispo: 1 seul
 		
 		//Cas où la réservation est possible
 		Client clientJDupont = (Client) utilisateurRepo.findById(1).get();
