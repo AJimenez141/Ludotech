@@ -3,7 +3,7 @@ package fr.eni.ludotech.bo;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -31,7 +31,7 @@ public class ExemplaireJeu {
 //    private Reservation reservation;
 
     @Column(name = "date_reservation")
-    private Date dateReservation;
+    private LocalDate dateReservation;
 
     @ManyToOne()
     @JoinColumn(name = "reservation_client_id")
