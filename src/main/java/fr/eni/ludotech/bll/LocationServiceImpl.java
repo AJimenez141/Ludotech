@@ -89,6 +89,24 @@ public class LocationServiceImpl implements LocationService
 		List<ExemplaireJeu> exemplaires = exemplaireRepo.findAll();
 		return exemplaires;
 	}
+
+	@Override
+	public void ajouterExemplaire(ExemplaireJeu exemplaire) {
+		exemplaireRepo.save(exemplaire);
+		
+	}
+
+	@Override
+	public void supprimerExemplaire(Integer id) {
+		exemplaireRepo.deleteById(id);
+		
+	}
+
+	@Override
+	public ExemplaireJeu modifierExemplaire(ExemplaireJeu exemplaire) {
+		exemplaireRepo.save(exemplaire);
+		return exemplaire;
+	}
 	
 
 }

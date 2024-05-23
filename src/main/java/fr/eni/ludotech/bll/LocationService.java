@@ -18,6 +18,12 @@ public interface LocationService {
 	
 	List<ExemplaireJeu> listerExemplaires();
 	
+	void ajouterExemplaire(ExemplaireJeu exemplaire);
+	
+	void supprimerExemplaire(Integer id);
+	
+	ExemplaireJeu modifierExemplaire(ExemplaireJeu exemplaire);
+	
 //	void reserverExemplaires(Client client, List<ExemplaireJeu> jeux);
 	
 //	boolean estDisponible(Integer idExemplaireJeu);
