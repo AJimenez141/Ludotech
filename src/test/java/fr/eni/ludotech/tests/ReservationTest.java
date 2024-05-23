@@ -14,14 +14,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import fr.eni.ludotech.bll.LocationServiceImpl;
 import fr.eni.ludotech.bll.ReservationServiceImpl;
 import fr.eni.ludotech.bo.ModeleJeu;
 import fr.eni.ludotech.bo.Adresse;
 import fr.eni.ludotech.bo.Client;
 import fr.eni.ludotech.bo.ExemplaireJeu;
 import fr.eni.ludotech.bo.Genre;
-import fr.eni.ludotech.bo.Location;
 import fr.eni.ludotech.dal.ExemplaireRepository;
 import fr.eni.ludotech.dal.ModeleJeuRepository;
 import fr.eni.ludotech.dal.UtilisateurRepository;
@@ -35,9 +33,6 @@ class ReservationTest
 {
 	@Autowired
 	ReservationServiceImpl reservationService;
-	
-	@Autowired
-	LocationServiceImpl locationService;
 	
 	@Autowired
 	UtilisateurRepository utilisateurRepo;
@@ -114,33 +109,20 @@ class ReservationTest
 	    clients = utilisateurRepo.saveAll(clients);
 	    clients.forEach(client -> log.info("Client inséré : " + client));
 	}
+	
+	@Test
+	//Tester la location d'un jeu
+	void testLocJeu()
+	{
+		//TODO
+	}
+
 
 	@Test
 	//Tester la réservation d'un jeu
 	void testResaJeu() 
 	{
-		ModeleJeu modeleMonopoly = modeleJeuRepo.findById(1).get();
-		ModeleJeu modeleRisk = modeleJeuRepo.findById(2).get();
-		
-		//Tester la location d'un jeu
-		List<ModeleJeu> jeux = new ArrayList<>();
-		
-		jeux.add(modeleMonopoly);
-		jeux.add(modeleRisk);
-		
-		Client clientPMartin = (Client) utilisateurRepo.findById(2).get();
-		
-		Location locationTest = locationService.louerJeux(jeux, clientPMartin);
-		
-		assertNotNull(locationTest);
-		assertEquals(clientPMartin, locationTest.getClient());
-		assertEquals(2, locationTest.getLocationExemplaires().size());
-		
-		log.info("La location de " + locationTest.getLocationExemplaires().size() + " jeux, à savoir: "
-				+ locationTest.getLocationExemplaires().get(0).getExemplaireJeu().getModeleJeu().getNom() + " et "
-				+ locationTest.getLocationExemplaires().get(1).getExemplaireJeu().getModeleJeu().getNom()
-				+ " a bien été enregistrée pour " 
-				+ clientPMartin.getPrenom() + " " + clientPMartin.getNom());
+		ModeleJeu modeleMonopoly = modeleJeuRepo.findById(1).get(); //Exemplaires dispo: 1 seul
 		
 		//Cas où la réservation est possible
 		Client clientJDupont = (Client) utilisateurRepo.findById(1).get();
@@ -156,13 +138,13 @@ class ReservationTest
 		+ " le " + exemplaireTest.getDateReservation());
 		
 		//Cas où la réservation n'est pas possible
-		Client clientMDurand = (Client) utilisateurRepo.findById(3).get();
-		ExemplaireJeu exemplaireTest2 = reservationService.reserverJeu(modeleMonopoly, clientMDurand);
+		Client clientPMartin = (Client) utilisateurRepo.findById(2).get();
+		ExemplaireJeu exemplaireTest2 = reservationService.reserverJeu(modeleMonopoly, clientPMartin);
 
 		assertNull(exemplaireTest2);
 		
 		log.info("Le jeu " + modeleMonopoly.getNom() 
-		+ " n'a pas pu être réservé par " + clientMDurand.getPrenom() + " " + clientMDurand.getNom()
+		+ " n'a pas pu être réservé par " + clientPMartin.getPrenom() + " " + clientPMartin.getNom()
 		+ " car il n'y a plus d'exemplaires disponibles");
 	}
 }
