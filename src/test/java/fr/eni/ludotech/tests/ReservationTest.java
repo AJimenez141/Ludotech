@@ -76,7 +76,7 @@ class ReservationTest
 	 // Insertion de plusieurs exemplaires de jeu
 	    List<ExemplaireJeu> exemplaires = new ArrayList<>();
 	    for (ModeleJeu modele : modeles) {
-	        for (int i = 0; i < 2; i++) {
+	        for (int i = 0; i < 3; i++) {
 	            ExemplaireJeu exemplaire = ExemplaireJeu.builder()
 	                .codeBarre(UUID.randomUUID().toString())
 	                .estLouable(i != 0) // Définir le premier exemplaire de chaque modèle comme non louable

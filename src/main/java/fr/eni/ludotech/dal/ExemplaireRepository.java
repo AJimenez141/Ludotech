@@ -17,4 +17,10 @@ public interface ExemplaireRepository extends JpaRepository<ExemplaireJeu, Integ
 		 + "AND e.estLouable = TRUE "
 		 + "AND e.modeleJeu.id = :idJeu")
 	List<ExemplaireJeu> findExemplairesNonReservesByJeu(@Param("idJeu") Integer idJeu);
+	
+	//Vérifier si un exemplaire est déjà loué par un client
+	@Query("SELECT COUNT(e) > 0 FROM LocationExemplaire e " 
+		 + "WHERE e.exemplaireJeu.id = :idExemplaire "
+		 + "AND e.dateFin IS NULL")
+	boolean isExemplaireAlreadyLoue(@Param("idExemplaire") Integer idExemplaire);
 }
