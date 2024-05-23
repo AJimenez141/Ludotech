@@ -2,8 +2,11 @@ package fr.eni.ludotech.rest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,9 +101,18 @@ public class TestLocationRestController {
 	}
 	
 	@DeleteMapping("/exemplaires/{id}")
-	public void supprimerExemplaire(@PathVariable(value = "id") Integer id) {
-		locationService.supprimerExemplaire(id);
+	public ResponseEntity<ExemplaireJeu> supprimerExemplaire(@PathVariable(value = "id") Integer id) {
 		
+		Optional<ExemplaireJeu> optEx = exemplaireRepo.findById(id);
+		ResponseEntity<ExemplaireJeu> resEx;
+		
+		if (optEx.isEmpty()) {
+			resEx = ResponseEntity.badRequest().build();
+		} else {
+			locationService.supprimerExemplaire(id);
+			resEx = ResponseEntity.status(HttpStatus.OK).body(optEx.get());
+		}
+		return resEx;	
 	}
 	
 	@PutMapping("/exemplaires/{id}")
