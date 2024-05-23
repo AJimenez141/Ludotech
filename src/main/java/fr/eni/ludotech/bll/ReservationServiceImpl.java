@@ -21,6 +21,8 @@ public class ReservationServiceImpl implements ReservationService
 		{
 			ExemplaireJeu exemplaire = exemplaireRepo.findExemplairesNonReservesByJeu(modele.getId()).get(0);
 			
+			//TODO: Vérifier que cet exemplaire n'a pas déjà été empunté par un autre client
+			
 			exemplaire.setReservationClient(client);
 			exemplaire.setDateReservation(java.time.LocalDate.now());
 			exemplaireRepo.save(exemplaire);

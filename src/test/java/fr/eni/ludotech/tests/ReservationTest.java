@@ -109,6 +109,13 @@ class ReservationTest
 	    clients = utilisateurRepo.saveAll(clients);
 	    clients.forEach(client -> log.info("Client inséré : " + client));
 	}
+	
+	@Test
+	//Tester la location d'un jeu
+	void testLocJeu()
+	{
+		//TODO
+	}
 
 
 	@Test
@@ -137,8 +144,7 @@ class ReservationTest
 		assertNull(exemplaireTest2);
 		
 		log.info("Le jeu " + modeleMonopoly.getNom() 
-		+ " n'a pas pu être réservé par " 
-		+ clientPMartin.getPrenom() + " " + clientPMartin.getNom()
+		+ " n'a pas pu être réservé par " + clientPMartin.getPrenom() + " " + clientPMartin.getNom()
 		+ " car il n'y a plus d'exemplaires disponibles");
 	}
 }
