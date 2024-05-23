@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.eni.ludotech.bo.ExemplaireJeu;
 import fr.eni.ludotech.bo.ModeleJeu;
-import fr.eni.ludotech.bo.Utilisateur;
+import fr.eni.ludotech.bo.Client;
 import fr.eni.ludotech.dal.ExemplaireRepository;
 import fr.eni.ludotech.dal.UtilisateurRepository;
 
@@ -17,17 +17,19 @@ public class ReservationServiceImpl implements ReservationService
 	private UtilisateurRepository utilisateurRepo;
 
 	@Override
-	public ExemplaireJeu reserverJeu(ModeleJeu modele, Utilisateur utilisateur) throws Exception 
+	public ExemplaireJeu reserverJeu(ModeleJeu modele, Client client) throws Exception 
 	{
 		ExemplaireJeu exemplaire = exemplaireRepo.findExemplairesNonReservesByJeu(modele.getId()).get(0);
 		
-		if (exemplaire != null) {
-			exemplaire.setReservationClient(utilisateur);
+		if (exemplaire != null) 
+		{
+			exemplaire.setReservationClient(client);
 			exemplaireRepo.save(exemplaire);
 			return exemplaire;
 		}
-		
-		return null;
+		else 
+		{
+			throw new Exception("Aucun exemplaire disponible pour ce jeu");
+		}
 	}
-
 }
