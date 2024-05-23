@@ -2,6 +2,8 @@ package fr.eni.ludotech.bo;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Location {
     private Integer id;
 
     @Column(name = "date_loc")
-    private Date dateLocation;
+    private LocalDate dateLocation;
 
     @Column(name = "est_paye")
     private boolean estPaye;

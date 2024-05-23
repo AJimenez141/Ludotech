@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -30,9 +31,9 @@ public class LocationExemplaire {
     private ExemplaireJeu exemplaireJeu;
 
     @Column(name = "date_fin")
-    private Date dateFin;
+    private LocalDate dateFin;
 
     @Column(name = "prix_final")
-    private  Float prixFinal;
+    private Double prixFinal;
 
 }
