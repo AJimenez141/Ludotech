@@ -14,8 +14,6 @@ public interface LocationService {
 	
 	void reserverModeleJeu(Client client, ModeleJeu modeleJeu);
 	
-	Location louerJeux(List<ModeleJeu> jeux, Client client);
-	
 	List<ExemplaireJeu> listerExemplaires();
 	
 	void ajouterExemplaire(ExemplaireJeu exemplaire);

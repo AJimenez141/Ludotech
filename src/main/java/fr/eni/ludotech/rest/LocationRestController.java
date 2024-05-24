@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.eni.ludotech.bll.LocationService;
 import fr.eni.ludotech.bo.ExemplaireJeu;
+import fr.eni.ludotech.bo.Location;
 import fr.eni.ludotech.dal.ClientRepository;
 import fr.eni.ludotech.dal.ExemplaireJeuRepository;
+import fr.eni.ludotech.dto.LocationDTO;
 
 @RestController
 public class LocationRestController {
@@ -65,5 +67,11 @@ public class LocationRestController {
 		exemplaire = locationService.modifierExemplaire(exemplaire);
 		return exemplaire;
 		
+	}
+	
+	@PostMapping("/locations")
+	public Location ajouterLocation(@RequestBody LocationDTO location) {
+		Location loc = locationService.louerExemplaires(location);
+		return loc;
 	}
 }

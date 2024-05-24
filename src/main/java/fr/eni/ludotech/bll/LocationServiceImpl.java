@@ -23,15 +23,6 @@ public class LocationServiceImpl implements LocationService
 	private LocationRepository locationRepo;
 	@Autowired
 	private ExemplaireJeuRepository exemplaireRepo;
-
-	@Override
-	public Location louerJeux(List<ModeleJeu> jeux, Client client)
-	{
-		Location location = new Location();
-		LocationExemplaire locationExemplaire = new LocationExemplaire();
-
-		return null;
-	}
 	
 	public LocationServiceImpl(LocationRepository locationRepo, ExemplaireJeuRepository jeuRepo) {
 		this.locationRepo = locationRepo;
