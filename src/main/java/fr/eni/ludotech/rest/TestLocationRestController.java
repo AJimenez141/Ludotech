@@ -85,42 +85,5 @@ public class TestLocationRestController {
 			System.out.println(jeuxNonDispo.toString());
 			
 	}
-	
-	@GetMapping("/exemplaires")
-	public List<ExemplaireJeu> listerExemplaires() {
-		
-		List<ExemplaireJeu> exemplaires = locationService.listerExemplaires();
-		return exemplaires;
-	}
-	
-	@PostMapping("/exemplaires")
-	public ExemplaireJeu ajouterExemplaire(@RequestBody ExemplaireJeu exemplaire) {
-		locationService.ajouterExemplaire(exemplaire);
-		
-		return exemplaire;
-	}
-	
-	@DeleteMapping("/exemplaires/{id}")
-	public ResponseEntity<ExemplaireJeu> supprimerExemplaire(@PathVariable(value = "id") Integer id) {
-		
-		Optional<ExemplaireJeu> optEx = exemplaireRepo.findById(id);
-		ResponseEntity<ExemplaireJeu> resEx;
-		
-		if (optEx.isEmpty()) {
-			resEx = ResponseEntity.badRequest().build();
-		} else {
-			locationService.supprimerExemplaire(id);
-			resEx = ResponseEntity.status(HttpStatus.OK).body(optEx.get());
-		}
-		return resEx;	
-	}
-	
-	@PutMapping("/exemplaires/{id}")
-	public ExemplaireJeu modifierExemplaire(@PathVariable(value = "id") Integer id, @RequestBody ExemplaireJeu exemplaire) {
-		exemplaire = locationService.modifierExemplaire(exemplaire);
-		return exemplaire;
-		
-	}
-
 
 }
