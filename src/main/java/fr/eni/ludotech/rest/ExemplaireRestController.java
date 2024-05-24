@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.eni.ludotech.bll.LocationService;
 import fr.eni.ludotech.bo.ExemplaireJeu;
+import fr.eni.ludotech.bo.ModeleJeu;
 import fr.eni.ludotech.dal.ClientRepository;
 import fr.eni.ludotech.dal.ExemplaireJeuRepository;
 
@@ -24,6 +25,12 @@ public class ExemplaireRestController {
 
 	@Autowired
 	private LocationService locationService;
+	
+	@GetMapping("/modeles")
+	public List<ModeleJeu> listerModelesDisponibles() {
+		List<ModeleJeu> modeles = locationService.listerModelesDisponibles();
+		return modeles;
+	}
 	
 	@PutMapping("/exemplaires/reserver/{id}")
 	public ExemplaireJeu modifierExemplaire(@PathVariable(value = "id") Integer id, @RequestBody ExemplaireJeu exemplaire) {

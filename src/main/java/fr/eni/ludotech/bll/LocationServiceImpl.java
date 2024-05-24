@@ -13,6 +13,7 @@ import fr.eni.ludotech.bo.LocationExemplaire;
 import fr.eni.ludotech.bo.ModeleJeu;
 import fr.eni.ludotech.dal.ExemplaireJeuRepository;
 import fr.eni.ludotech.dal.LocationRepository;
+import fr.eni.ludotech.dal.ModeleJeuRepository;
 import fr.eni.ludotech.bo.ExemplaireJeu;
 import fr.eni.ludotech.dto.LocationDTO;
 import fr.eni.ludotech.exception.JeuxNonDisponible;
@@ -23,6 +24,18 @@ public class LocationServiceImpl implements LocationService
 	private LocationRepository locationRepo;
 	@Autowired
 	private ExemplaireJeuRepository exemplaireRepo;
+	
+	@Autowired
+	private ModeleJeuRepository modeleJeuRepo;
+
+	@Override
+	public Location louerJeux(List<ModeleJeu> jeux, Client client)
+	{
+		Location location = new Location();
+		LocationExemplaire locationExemplaire = new LocationExemplaire();
+
+		return null;
+	}
 	
 	public LocationServiceImpl(LocationRepository locationRepo, ExemplaireJeuRepository jeuRepo) {
 		this.locationRepo = locationRepo;
@@ -72,7 +85,8 @@ public class LocationServiceImpl implements LocationService
 	
 	@Override
 	public List<ModeleJeu> modeleJeuxDisponibles() {
-		return exemplaireRepo.findModelesJeuxDisponible();
+		List<ModeleJeu> modeles = exemplaireRepo.findModelesJeuxDisponible();
+		return modeles;
 	}
 
 	@Override
@@ -97,6 +111,12 @@ public class LocationServiceImpl implements LocationService
 	public ExemplaireJeu modifierExemplaire(ExemplaireJeu exemplaire) {
 		exemplaireRepo.save(exemplaire);
 		return exemplaire;
+	}
+
+	@Override
+	public List<ModeleJeu> listerModelesDisponibles() {
+		List<ModeleJeu> modeles = modeleJeuRepo.findModelesDisponible();
+		return modeles;
 	}
 	
 
